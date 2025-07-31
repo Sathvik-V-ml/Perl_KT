@@ -1,0 +1,30 @@
+#!/usr/bin/perl
+my %data;
+print "enter number of students";
+my $n=<STDIN>;
+chomp($n);
+
+for($i=0;$i<$n;$i++){
+    print "enter the student name:";
+    my $name=<STDIN>;
+    chomp($name);
+
+    print "enter the marks of the students";
+    my $marks=<STDIN>;
+    chomp($marks);
+
+    $data{$name}=$marks;
+}
+
+
+our $tn ="";
+our $tm=-1;
+
+foreach $j (keys %data){
+    if($data{$j}>$tm){
+        $tm=$data{$j};
+        $tn=$j;
+    }
+}
+print $tm;
+print $tn;
