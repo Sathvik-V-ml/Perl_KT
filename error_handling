@@ -1,0 +1,23 @@
+# #!usr/bin/perl
+# # die : it stops the program immetiatly once it encounters an error in the particular program 
+open(my $out,'<',$filename) or die "the fileeeeeeee is not found $!\n";
+# #  "$!" this is used to actually know the error message tht is been printed in the OS.
+print $out "hellllllllllllllllllllo";
+close $out;
+
+# #warn : it just warns the user bu the program wont be terminated here we usually use the warn statement in nin - fatal errors
+open(my $out,'>',$filename) or warn "the fileeeeeeee is not found $!\n";
+print $out "hellllllllllllllllllllo";
+close $out;
+
+# eval is basically just like try block statement in java here the die when its activated it wont crash the program instead it give error message which is stored in the "$@" which can ve used to do whatever the usr wants
+eval {
+    open(my $out, '>', $filename) or die "the fileeeeeeee is not found: $!\n";
+};
+if ($@) {
+    print "We have found an error in this program: $@\n";
+}
+
+
+# Try::Tiny is module that enables us to use try/catch block in the prgram
+# autodie : instead writing or die and statement and all we can just use autodie ad it automatically print the error message when an error is encountered
