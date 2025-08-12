@@ -1,0 +1,27 @@
+package obj_orient;
+use strict;
+use warnings;
+
+sub new {
+    my ($class, $prod_name, $price) = @_;
+    my $self = {
+        _prod_name => $prod_name,
+        _price     => $price
+    };
+    bless $self, $class;
+    return $self;
+}
+
+sub get_prod {
+    my $self = shift;
+    return $self->{_prod_name};
+}
+
+sub get_price {
+    my $self = shift;
+    return $self->{_price};
+}
+ sub get_details{
+    die "not able to access";
+ }
+1;
