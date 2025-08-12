@@ -1,0 +1,32 @@
+# | Mode            | Symbol | Description                                   |    |                              |
+# | --------------- | ------ | --------------------------------------------- | -- | ---------------------------- |
+# | Read            | `<`    | Opens file for reading                        |    |                              |
+# | Write           | `>`    | Creates a new file or truncates existing file |    |                              |
+# | Append          | `>>`   | Appends to the end of an existing file        |    |                              |
+# | Read + Write    | `+<`   | Opens file for reading and writing            |    |                              |
+# | Write + Create  | `+>`   | Truncates and opens file for read/write       |    |                              |
+# | Append + Create | `+>>`  | Appends and allows reading                    |    |                              |
+# | Pipe            | \`     | -`or`-                                        | \` | For piping to/from processes |
+
+use strict;
+use warnings;
+# writing  and creating the file
+my $filename = 'sample.txt';
+open(STDOUT,'>',$filename) or die "not able to open the file for writing in it";
+print "hello mysuru and all the people of mysuru welcome";
+close(STDOUT);
+
+# writing and creating the file
+my $filename = 'sample1.txt';
+open(STDOUT,'+>',$filename) or die "not able to open the file for writing in it";
+print "hello mysuru and all the people of mysuru welcome";
+close(STDOUT);
+
+
+# reading the file
+open(my $in,'<',$filename) or die "not able to open to read";
+while(my $line = <$in>){
+    print "$line";   
+}
+close $in;
+
