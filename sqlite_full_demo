@@ -1,0 +1,95 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use DBI;
+
+# Connect to SQLite database (creates file if it doesn't exist)
+my $db_file = "mydata.db";
+my $dbh = DBI->connect("dbi:SQLite:dbname=$db_file", "", "", {
+    RaiseError => 1,
+    AutoCommit => 1,
+}) or die $DBI::errstr;
+
+print "Connected to database: $db_file\n";
+
+# -------------------------------
+# Step 1: Create a table
+# -------------------------------
+eval {
+    $dbh->do(<<'SQL');
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL
+);
+SQL
+    print "Table 'users' created or already exists.\n";
+};
+if ($@) {
+    warn "Table creation failed: $@";
+}
+
+# -------------------------------
+# Step 2: Insert sample users
+# -------------------------------
+my $insert_sth = $dbh->prepare("INSERT INTO users (name, email) VALUES (?, ?)");
+
+my @users = (
+    ['Alice', 'alice@example.com'],
+    ['Bob',   'bob@example.com'],
+    ['Carol', 'carol@example.com']
+);
+
+foreach my $user (@users) {
+    eval {
+        $insert_sth->execute(@$user);
+        print "Inserted user: $user->[0], $user->[1]\n";
+    };
+    warn "Insert failed for $user->[1]: $@" if $@;
+}
+
+# -------------------------------
+# Step 3: Select and display all users
+# -------------------------------
+print "\nAll users in the database:\n";
+my $select_sth = $dbh->prepare("SELECT id, name, email FROM users");
+$select_sth->execute();
+
+while (my $row = $select_sth->fetchrow_hashref()) {
+    print "ID: $row->{id}, Name: $row->{name}, Email: $row->{email}\n";
+}
+
+# -------------------------------
+# Step 4: Update a user's name
+# -------------------------------
+eval {
+    my $update_sth = $dbh->prepare("UPDATE users SET name = ? WHERE email = ?");
+    $update_sth->execute('Alice Smith', 'alice@example.com');
+    print "\nUpdated Alice's name to 'Alice Smith'.\n";
+};
+warn "Update failed: $@" if $@;
+
+# -------------------------------
+# Step 5: Delete a user
+# -------------------------------
+eval {
+    my $delete_sth = $dbh->prepare("DELETE FROM users WHERE email = ?");
+    $delete_sth->execute('carol@example.com');
+    print "Deleted user with email: carolexample.com\n";
+};
+warn "Delete failed: $@" if $@;
+
+# -------------------------------
+# Step 6: Display updated list of users
+# -------------------------------
+print "\nUsers after update and delete:\n";
+$select_sth->execute();
+while (my $row = $select_sth->fetchrow_hashref()) {
+    print "ID: $row->{id}, Name: $row->{name}, Email: $row->{email}\n";
+}
+
+# -------------------------------
+# Step 7: Disconnect
+# -------------------------------
+$dbh->disconnect();
+print "\nDisconnected from the database.\n";
