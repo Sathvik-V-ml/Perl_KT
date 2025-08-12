@@ -1,0 +1,12 @@
+use strict;
+use warnings;
+use lib '.';
+use child;
+use obj_orient;
+my $obj1 = obj_orient->new("soap", 99);
+my $obj2 = obj_orient->new("biscuit", 50);
+my obj3 = child->new();
+print $obj1->get_price(), "\n";
+print $obj2->get_prod(), "\n";
+print $obj2->get_price(), "\n";
+print $obj3->get_details(),"\n";
