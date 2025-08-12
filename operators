@@ -1,0 +1,67 @@
+
+# use strict;
+# use warnings;
+#!/usr/bin/perl
+print "hello mysuru\n";
+my $a = 55;
+my $b = 44;
+print $a + $b;
+my @arr = ("one","two","three");
+my @arr1 = (2,"orange","carrot");
+print "\n $arr[1]\n";
+print $arr1[0] +$arr[1];
+# my %hash = ("one"=>false,""=>true);
+# print $hash{""};
+# for(my $i=2;$i<60;$i++){
+#     print "$i\n";
+# }
+for (@arr){
+    print "$_\n";
+}
+
+if($a>18){
+    print "age more than 18";
+}
+else
+{
+    print "not eleigible";
+}
+
+my %has1 = (2=>"two",3=>"three");
+print $has1{2};
+print "\n";
+
+my $r1 = "hello";
+our $r2 = 533;
+print $r1 + $r2;
+
+my @ar1 = (2,3,4,5,6,7,8,9,122,3,4,555,33,5,6,77,8,8,888,99);
+print $ar1[5];
+print "\n";
+print $ar1[5]+$ar1[4];
+print $ar1[4]*$ar1[8]/$ar1[12];
+
+my %hr1 = ("hello"=>"mysurur","hello"=>"mandya","hi"=>"maddur");
+print $hr1{hello};
+print $hr1{mandya};
+
+
+
+# my $j=33;
+# until($j>50){
+#     print "$j\n";
+#     $j++;
+# }
+
+# my $k=11;
+# foreach (@arr1){
+#     print "$_\n";
+# }
+
+foreach $fruit (@ar1){
+    next if $fruit ==4;
+    next if $fruit == 5;
+    last if $fruit == 7;
+    print "$fruit\n";
+}
+
