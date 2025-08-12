@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+# $n = 30;
+# for(my $i=1;$i<=$n;$i++){
+#     if($i%2==0){
+#         print "$i is even\n";
+#     }
+#     else{
+#         print "$i is odd\n";
+#     }
+# }
+
+print "enter your name";
+my %input = <STDIN>;
+chomp(%input);
+print "hello, %input";
+print $input{4};
+
+
+print "enter the array elements";
+for(@arr){
+    $in = <STDIN>;
+    chomp($in);
+}
+
+for(@arr){
+    print "$_\n";
+}
+
