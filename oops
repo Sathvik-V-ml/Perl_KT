@@ -1,0 +1,22 @@
+package oops;
+
+sub new {
+    my ($class, $name, $age) = @_;
+    my $self = {
+        name => $name,
+        age  => $age
+    };
+    bless $self, $class;
+    return $self;
+}
+
+sub get_name {
+    my $self = shift;
+    return $self->{'name'};
+}
+
+sub get_age {
+    my $self = shift;
+    return $self->{'age'};
+}
+1;
