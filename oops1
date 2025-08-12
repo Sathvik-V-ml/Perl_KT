@@ -1,0 +1,9 @@
+use strict;
+use warnings;
+use lib '.';       # assuming oops.pm is in the current directory
+use oops;
+
+my $obj = oops->new("Sanjai", 22);
+print $obj->get_name(), "\n";
+print $obj->get_age(), "\n";
+
