@@ -1,0 +1,18 @@
+#!/usr/bin/perl
+use Time::Piece
+
+print "enter your date of birth :";
+my $dob1 = <STDIN>;
+chomp($dob1);
+
+my $dob = Time::Piece->strptime($dob1,"%d-%m-%Y");
+
+my $day = localtime;
+
+my $bd = $day->year - $dob->year;
+
+
+if($day->mon<$dob->mon || $day->mon==$dob->mon && $day->mday<$dob->mday){
+    $bd--;
+}
+print "the age is : $bd";
