@@ -1,0 +1,72 @@
+# calling a subroutine
+sub hello{
+    print "hello mysuru";
+}
+
+hello();
+print  "\n";
+
+
+# passing arguements to subroutine
+sub sum{
+    my ($n1,$n2,$n3) = @_;
+    my $sum = $n1+$n2+$n3;
+    print "sum = $sum \n";
+}
+sum(5,7,3);
+
+
+# return values from subroutines
+sub area{
+my ($b) = @_;
+my $ar = $b * $b;
+return $ar;
+}
+my $a = area(4);
+print "area of square is $a";
+
+#returning multiple values using a subroutines
+sub sortt{
+    my (@n) = @_;
+    my $min = (sort{$a<=>$b}@n)[0];
+    my $max = (sort{$b<=>$a}@n)[0];
+    return ($min,$max);
+}
+my ($min,$max) = sortt(1,7,5,2,9,3,6,0);
+print "minimum is $min and maximmum is $max";
+
+
+
+#passing the arguments the subroutine can behave based on parameter passed
+sub greet{
+    my ($a) = @_;
+    $a = "guest" unless defined $a;
+    print "hello $a"; 
+    }
+greet("ram");
+greet();
+
+
+
+# sub greet1($a="guest"){
+#     print "hello $a"; 
+#     }
+# greet1("ram");
+# greet1();
+
+
+
+#references in perl
+my $x = 9;
+$ref =  \$x;
+print "the ADDRESS pf x is : $ref";
+print "the value pf x is : $$ref";
+
+my @y = "1,2,3,4,,5,5,6,6,7,7";
+$ref1 = \@y;
+print "the ADDRESS pf y is : @$ref1";
+
+
+
+
+
