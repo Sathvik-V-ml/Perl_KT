@@ -1,0 +1,30 @@
+#!usr/bin/perl
+# basic match operator
+my $text = "hello mysuru";
+if($text =~ /hello/){
+    print "match found\n";
+}
+
+# case sensitive match
+my $a="my world";
+if($a =~ /MY/i){
+    print "matchedddddddd\n";
+}
+
+# subsititution here we "s///"
+my $text1 = "i love mysuru";
+$text1 =~ s/love/like/;
+print "$text1";
+
+# word char and digit
+my $str1 = "abscd2034";
+if($str1=~/\w+\d/){
+    print "words are present";
+}
+
+
+# repetition of alphabets using quatifiers like {} for range 
+my $str2 = "aaa";
+if($str2 =~ /a{2,}/){
+    print "more aa;s";
+}
