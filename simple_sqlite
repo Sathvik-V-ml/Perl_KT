@@ -1,0 +1,38 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use DBI;
+
+# Connect to SQLite database (creates the file if it doesn't exist)
+my $dbh = DBI->connect("dbi:SQLite:dbname=test.db", "", "", { RaiseError => 1 });
+
+# Create a table
+$dbh->do("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)");
+
+# Insert data
+$dbh->do("INSERT INTO users (name) VALUES ('Alice')");
+$dbh->do("INSERT INTO users (name) VALUES ('Bob')");
+
+# Read data
+my $sth = $dbh->prepare("SELECT * FROM users");
+$sth->execute();
+while (my @row = $sth->fetchrow_array) {
+    print "ID: $row[0], Name: $row[1]\n";
+}
+
+# Update data
+$dbh->do("UPDATE users SET name = 'Alice Smith' WHERE name = 'Alice'");
+
+# Delete data
+$dbh->do("DELETE FROM users WHERE name = 'Bob'");
+
+# Show final data
+print "\nAfter update and delete:\n";
+$sth = $dbh->prepare("SELECT * FROM users");
+$sth->execute();
+while (my @row = $sth->fetchrow_array) {
+    print "ID: $row[0], Name: $row[1]\n";
+}
+
+# Disconnect from database
+$dbh->disconnect;
