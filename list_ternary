@@ -1,0 +1,49 @@
+#!/usr/bin/perl
+# ternery operators
+my $age = 4;
+my $status = ($age>=18)?"eligible":"not eligible";
+print "$status\n";
+
+# nested ternery operators
+my $marks=98;
+my $grade = ($marks>=90)?"A":
+            ($marks>=80)?"B":
+            ($marks>=70)?"C":"F";
+print "$grade\n";
+
+
+# complex blocks can be implmented using the do block in ternery operators
+my $flag = true;
+my $val = $flag
+    ? do {
+        print "True path\n";
+        1;
+      }
+    : do {
+        print "False path\n";
+        0;
+      };
+
+
+# list
+my @list = (1,2,3,4,5,6,7);
+# scaler context
+my $scaler = @list;
+# list context
+my ($first) = @list;
+print "$scaler";
+print "$first";
+
+# list creation using commas
+my @list1 = (1,2,3);
+# list creation using range works with numbers and letters
+my @list2 = (1..10);
+# list in quote form 
+my @list3 = qw(apple 1 2);
+# list flattening
+my @a = (1,2,3,4);
+my @b = (4,5,6,7);
+my @c = (@a,@b,8,9,0);
+my @d = @c[2..8];
+print "@c\n"; #  1 2 3 4 4 5 6 7 8 9 0
+print "@d";   #  0 1 2 3 4 5 6 7 8
